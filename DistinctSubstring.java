@@ -1,6 +1,4 @@
 package distinctsubstring;
-
-
 /*
  Given a string, find the length of the longest substring without repeating characters.
  Examples:
@@ -57,6 +55,7 @@ public class DistinctSubstring {
     public static void testCode()
     {
         assertEquals(0,findMaxLength(""));
+		assertEquals(0,findMaxLength(null));
         assertEquals(3,findMaxLength("abc"));
         assertEquals(3,findMaxLength("abcabacbb"));
         assertEquals(2,findMaxLength("Bbbbb"));
