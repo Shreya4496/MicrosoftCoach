@@ -1,6 +1,4 @@
 package distinctsubstring;
-
-
 /*
  Given a string, find the length of the longest substring without repeating characters.
  Examples:
@@ -8,59 +6,96 @@ package distinctsubstring;
  Given "bbbbb", the answer is "b", with the length of 1.
  Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
  */
+import static org.testng.Assert.assertEquals;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
-import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.Test;
 
-public class DistinctSubstring {
-
-    public static void main(String[] args) {
-        // TODO code application logic here
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the string : ");
-        String input = sc.nextLine();
-        int n;
-        if((n=findMaxLength(input))==-1)
-            System.out.println("Invalid Input");
-        else 
-            System.out.println(n);
-    }
-    public static int findMaxLength(String input)
-    {
-       if(input.contains(" "))
-           return -1;
-       int i,j=0;
-       int maxlen=0;
-       int len =0;
-       Set<Character> s = new HashSet<Character>();
-       for(i=0;i<input.length();)
-       {
-            if(s.isEmpty()|| !(s.contains(input.charAt(i))))
-                {
-                     s.add(input.charAt(i));
-                     i++;
-                     len = i-j;
-                }
-            else
-                {
-                  s.remove(input.charAt(j));
-                  j++;
-                }
-            if(len>maxlen)
-                maxlen = len;
-       }
-       return maxlen;
-    }
-    @Test
-    public static void testCode()
-    {
-        assertEquals(0,findMaxLength(""));
-        assertEquals(3,findMaxLength("abc"));
-        assertEquals(3,findMaxLength("abcabacbb"));
-        assertEquals(2,findMaxLength("Bbbbb"));
-        assertEquals(3,findMaxLength("#*#@"));
-        assertEquals(3,findMaxLength("pwwkew"));
-    }
+public class Week1DistinctLongestSubstring {
+	
+	public static void main(String args[])
+	{
+		Scanner sc= new Scanner (System.in);
+		String input= sc.nextLine();
+		int n;
+		if((n=findMaxLength(input))==-1)
+		{
+			System.out.println("Invalid input");
+		}
+		else
+		{
+			System.out.println(n);
+		}
 }
+
+	public static int findMaxLength(String input) {
+		// TODO Auto-generated method stub
+		if (input==null)
+			return 0;
+		if(input.length()==1)
+			return 1;
+		Set<Character> s= new HashSet<Character>();
+		int len=0,maxlen=0,j=0,i=0;
+		while(i<input.length()&&j<input.length())
+		{   
+			if(input.charAt(i)==' ')
+				return -1;
+			
+			if(s.isEmpty() || !s.contains(input.charAt(i)))
+			{
+				s.add(input.charAt(i));
+				i++;
+				len=i-j;
+			}
+			else
+			{
+				s.remove(input.charAt(j));
+				j++;
+			}
+			
+			if(len>maxlen)
+				maxlen=len;
+		}	
+		return maxlen;
+	}
+	
+	@Test(enabled=true)
+	public void test1()
+	{
+		assertEquals(4,findMaxLength("abcsbcd"));
+	}
+	
+	@Test(enabled=true)
+	public void test2()
+	{
+		assertEquals(0,findMaxLength(null));
+	}
+	
+	@Test(enabled=true)
+	public void test3()
+	{
+		assertEquals(1,findMaxLength("bbbbb"));
+	}
+	
+	@Test(enabled=true)
+	public void test4()
+	{
+	    assertEquals(4,findMaxLength("sabsad"));
+	}
+	
+	@Test(enabled=true)
+	public void test5()
+	{
+		assertEquals(3,findMaxLength("pwwkew"));
+	}
+	
+	@Test(enabled=true)
+	public void test6()
+	{
+		assertEquals(4,findMaxLength("$34a"));
+	}
+		
+}
+
