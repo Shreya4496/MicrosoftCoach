@@ -28,7 +28,6 @@ Approach Used: Hashing
 		    return null
  */
 
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -65,35 +64,33 @@ public class Sum3 {
     {
     	if (arr == null || arr.length < 2)
     		return null;
-    	HashSet<Integer> s= new HashSet<>();
-    	List<List<Integer>> r = new ArrayList<List<Integer>>();
-    	int target,a,b;
+    	List<List<Integer>> result = new ArrayList<List<Integer>>();
     	for(int i=0;i<arr.length-1;i++)
-    	{   
-    		target=-arr[i];
+    	{   HashSet<Integer> seenValues= new HashSet<>();
+    		int target=-arr[i];
     		for(int j=i+1;j<arr.length;j++)
     		{   
-    			if(s.contains(target-arr[j]))
+    			if(seenValues.contains(target-arr[j]))
     			{       			     
-    				 a= Math.min(arr[i],Math.min(arr[j],target-arr[j]));
-    				 b= Math.max(arr[i],Math.max(arr[j],target-arr[j]));                      
+    				 int a= Math.min(arr[i],Math.min(arr[j],target-arr[j]));
+    				 int b= Math.max(arr[i],Math.max(arr[j],target-arr[j]));                      
     				 List<Integer> l=new ArrayList<Integer>();
 					 l.add(a);
 					 l.add(-(a+b));
 					 l.add(b);
-                 	 if(!r.contains(l))
-				         r.add(l);
+                 	 if(!result.contains(l))
+				         result.add(l);
     			}
-      			s.add(arr[j]);
+      			seenValues.add(arr[j]);
     		}
-            s.clear();
+           
     	}
     	
-    	if(!r.isEmpty())
-    		return r;
+    	if(!result.isEmpty())
+    		return result;
            
     	else
-    		return null;
+    		return null  ;
     }
     
     
@@ -103,40 +100,28 @@ public class Sum3 {
        Assert.assertEquals(null,check3Sum(new int[]{1,2,3,4,5}));
     }
     @Test(enabled=true)
-    public static void test2()
+    public static void testMultipleSolution()
     {  List<List<Integer>> r = new ArrayList<List<Integer>>();
-	   List<Integer> l=new ArrayList<Integer>();
-	   List<Integer> l2=new ArrayList<Integer>();
-	   l.add(-1);
-	   l.add(0);
-	   l.add(1);
-	   r.add(l);
-	   l2.add(-1);
-	   l2.add(-1);
-	   l2.add(2);
-	   r.add(l2);      
+	   r.add(Arrays.asList(new Integer[] {-1, 0, 1}));
+	   r.add(Arrays.asList(new Integer[] {-1,-1,2}));    
        Assert.assertEquals(r ,check3Sum(new int[]{-1,0,1,2,-1,4}));
     }
     
     @Test(enabled=true)
-    public static void test3()
+    public static void testUniqueSol()
     {
 	   List<List<Integer>> r = new ArrayList<List<Integer>>();
-	   List<Integer> l=new ArrayList<Integer>();
-       l.add(0);
-	   l.add(0);
-	   l.add(0);
-	   r.add(l);
+	   r.add(Arrays.asList(new Integer[] {0,0,0}));
 	   Assert.assertEquals( r,check3Sum(new int[]{0,0,0,0}));
     }
 	
     @Test(enabled=true)
-    public static void test4()
+    public static void testEmptySol()
     {
        Assert.assertEquals(null,check3Sum(new int[]{}));
     }
     @Test(enabled=true)
-    public static void test5()
+    public static void testNoSol()
     {
        Assert.assertEquals(null,check3Sum(new int[]{-1,1,2,-2}));
     }
