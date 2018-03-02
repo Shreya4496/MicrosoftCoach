@@ -54,7 +54,6 @@ import org.testng.annotations.Test;
 public class Week3WordBreak {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		Scanner sc=new Scanner(System.in);
 		int n=sc.nextInt();			
 		Set<String> dict=new HashSet<String>();
@@ -69,11 +68,11 @@ public class Week3WordBreak {
 	}
 
 	public static boolean checkWordBreak(Set<String> dict, String input) {
-		// TODO Auto-generated method stub
-		
+		if(input==null || dict==null)
+			throw new NullPointerException();
 		if(dict.size()==0)
 			return false;
-		if (input=="" || input==null)
+		if (input=="")
 			return true;
 			
 		boolean [] containsWord=new boolean[input.length()];
@@ -81,22 +80,22 @@ public class Week3WordBreak {
 		{
 			if(dict.contains(input.substring(0, i+1)))
 				containsWord[i]=true;
-			if (containsWord[i] == true && (i == (input.length() - 1)))
+			if (containsWord[i]  && (i == (input.length() - 1)))
 			    return true;
-			if(containsWord[i]==true)
+			if(containsWord[i])
 			{
 				for(int j=i+1;j<input.length();j++)
 				{
 					if(dict.contains(input.substring(i+1,j+1)))
 						containsWord[j]=true;
-					if(j == input.length() - 1 && containsWord[j] == true) 
+					if(j == input.length() - 1 && containsWord[j]) 
 						return true;
 				}
 			}
 				
 		}
 		
-	    return false;
+		return false;
 	}
 	
 	@Test(enabled=true)
@@ -132,6 +131,13 @@ public class Week3WordBreak {
 	{
 		Set<String> dict=new HashSet<String>(Arrays.asList());
 		Assert.assertEquals(false,checkWordBreak(dict,"i"));
+	}
+	
+	@Test(enabled=true)
+	public void checkWordBreak_NullDict_Error()
+	{
+		Set<String> dict=new HashSet<String>(Arrays.asList());
+		Assert.assertEquals(new NullPointerException(),checkWordBreak(dict,null));
 	}
 
 }
