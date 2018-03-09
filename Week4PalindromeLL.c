@@ -38,9 +38,9 @@ struct Node
 }*start;
 
 struct Node* createNode(char);
-bool checkPalindrome(struct Node * );
+bool checkPalindrome(struct Node* );
 struct Node* reverse(struct Node*);
-bool compareLists(struct Node* , struct Node *);
+bool compareLists(struct Node* , struct Node*);
 
 void insert(char ele)
 {
@@ -49,7 +49,7 @@ void insert(char ele)
 		
 	else
 	{
-		struct Node * temp=start;
+		struct Node* temp=start;
 	
 		while(temp->next)
 			temp=temp->next;
@@ -65,15 +65,15 @@ struct Node* createNode(char ele)
 	return newNode;
 }
 
-bool checkPalindrome(struct Node * start)
+bool checkPalindrome(struct Node* start)
 {
 	if(!start || !start->next)
 		return true;
  	
 	bool odd=false;
-	struct Node *fast_ptr=start;
-	struct Node *slow_ptr=start;
-	struct Node *prev_slow_ptr;
+	struct Node* fast_ptr=start;
+	struct Node* slow_ptr=start;
+	struct Node* prev_slow_ptr;
 	
 	while(fast_ptr && fast_ptr->next)
 	{   prev_slow_ptr=slow_ptr;
@@ -84,14 +84,14 @@ bool checkPalindrome(struct Node * start)
 	if(fast_ptr)
 	  odd=true;
    
-	struct Node *prev_mid=prev_slow_ptr;
+	struct Node* prev_mid=prev_slow_ptr;
 	struct Node* second_part;
 	if(odd)
 		second_part=prev_mid->next->next;
 	else
 	    second_part=prev_mid->next;
 		
-	struct Node *reverse_head=reverse(second_part);
+	struct Node* reverse_head=reverse(second_part);
 	struct Node* tmp=prev_slow_ptr->next;
 	prev_slow_ptr->next=NULL;
 	bool res = compareLists(start, reverse_head);
@@ -123,7 +123,7 @@ struct Node* reverse(struct Node* head_ref)
     
 }
 
-bool compareLists(struct Node* head1, struct Node *head2)
+bool compareLists(struct Node* head1, struct Node* head2)
 {
     struct Node* temp1 = head1;
     struct Node* temp2 = head2;
@@ -143,7 +143,7 @@ bool compareLists(struct Node* head1, struct Node *head2)
 
 //TEST CASES
 
-void createList(char *elements,struct Node *start)
+void createList(char* elements,struct Node* start)
 {   
 	start=NULL;
 	int i;
