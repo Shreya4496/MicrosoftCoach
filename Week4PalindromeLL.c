@@ -129,13 +129,10 @@ bool compareLists(struct Node* head1, struct Node *head2)
     struct Node* temp2 = head2;
     while (temp1 && temp2)
     {
-        if (temp1->ele == temp2->ele)
-        {
-            temp1 = temp1->next;
-            temp2 = temp2->next;
-        }
-        else 
-			return false;
+       if (temp1->ele != temp2-> ele)
+		   return false;
+	   temp1 = temp1->next;
+	   temp2 = temp2->next;
     }
  
     if (!temp1 && !temp2)
@@ -145,73 +142,67 @@ bool compareLists(struct Node* head1, struct Node *head2)
 }
 
 //TEST CASES
+
+void createList(char *elements,struct Node *start)
+{   
+	start=NULL;
+	int i;
+    for (i = 0;elements[i]!='\0'; i++)
+        insert(elements[i]);
+}
 bool checkPalindrome_EmptyString_True() 
 {
 	char elements[] = "";
-    start=NULL;
-    int i;
-    for ( i = 0;elements[i]!='\0'; i++)
-        insert(elements[i]);
+    createList(elements,start);
 
-    if (checkPalindrome(start))
-		return true;
-    else
-	    return false;
+    return checkPalindrome(start);
 }
 
 bool checkPalindrome_PalindromeString_True() 
 {
-	char elements[] = "$@*55*@$";
-    start=NULL;
-    int i;
-    for (i = 0;elements[i]!='\0'; i++)
-        insert(elements[i]);
+	char elements[] = "$@*5*@$";
+   createList(elements,start);
 
-    if (checkPalindrome(start))
-		return true;
-    else
-	    return false;
+    return checkPalindrome(start);
 }
 
 bool checkPalindrome_CaseSensitivePalindromeString_True() 
 {
 	char elements[] = "AsBBsA";
-    start=NULL;
-    int i;
-    for (i = 0;elements[i]!='\0'; i++)
-        insert(elements[i]);
-
-    if (checkPalindrome(start))
-		return true;
-    else
-	    return false;
+    createList(elements,start);
+    return checkPalindrome(start);
 }
 
 bool checkPalindrome_NotPalindromeString_False() 
 {
 	char elements[] = "acd$";
-    start=NULL;
-    int i;
-    for (i = 0;elements[i]!='\0'; i++)
-        insert(elements[i]);
+    createList(elements,start);
 
-    if (checkPalindrome(start))
-		return true;
-    else
-	    return false;
+    return checkPalindrome(start);
 }
-	
+
+bool checkPalindrome_NotPalindromeStringSingleLength_False() 
+{
+	char elements[] = "a";
+    createList(elements,start);
+    return checkPalindrome(start);
+}
+bool checkPalindrome_NotPalindromeStringOddLength_False() 
+{
+	char elements[] = "abc";
+    createList(elements,start);
+    return checkPalindrome(start);
+}
 int main() {
-	char elements[]="cabc$cbac";
+	char elements[]="abac";
 	int i;
-	for(i=0;elements[i]!='\0';i++)
-	   insert(elements[i]);
+	createList(elements,start);
 	if(checkPalindrome(start))
 	   printf("Palindrome");
 	else
 	   printf("Not a Palindrome");
 	   
-	if(checkPalindrome_CaseSensitivePalindromeString_True()&&checkPalindrome_EmptyString_True()&&checkPalindrome_PalindromeString_True()&&!checkPalindrome_NotPalindromeString_False()) 
+	if(checkPalindrome_CaseSensitivePalindromeString_True()&&checkPalindrome_EmptyString_True()&&checkPalindrome_PalindromeString_True()&&!checkPalindrome_NotPalindromeString_False()&&checkPalindrome_NotPalindromeStringSingleLength_False()&&!checkPalindrome_NotPalindromeStringOddLength_False()  ) 
 	   printf("All Test Cases passed") ;
 	else
 	   printf("Test Case Failed");
