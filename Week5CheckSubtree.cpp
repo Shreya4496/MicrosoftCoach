@@ -40,13 +40,9 @@ node* insertLevelOrder(int arr[], node* root,
     if (i < n)
     {
         node* temp = newNode(arr[i]);
-        root = temp;
-         
-        root->left = insertLevelOrder(arr,
-                   root->left, 2 * i + 1, n);
- 
-        root->right = insertLevelOrder(arr,
-                  root->right, 2 * i + 2, n);
+        root = temp; 
+        root->left = insertLevelOrder(arr,root->left, 2 * i + 1, n);
+        root->right = insertLevelOrder(arr,root->right, 2 * i + 2, n);
     }
     return root;
 }
